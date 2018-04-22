@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import static org.assertj.core.api.Assertions.*;
+
 public class UsuarioTest extends SpringTest{
 
 	
