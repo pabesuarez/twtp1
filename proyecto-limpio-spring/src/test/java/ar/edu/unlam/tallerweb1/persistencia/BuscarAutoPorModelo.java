@@ -5,7 +5,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+import org.assertj.core.api.AbstractAssert;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Auto;
+import ar.edu.unlam.tallerweb1.modelo.Empleado;
 import ar.edu.unlam.tallerweb1.modelo.Marca;
 import ar.edu.unlam.tallerweb1.modelo.Modelo;
 
@@ -92,17 +94,21 @@ public class BuscarAutoPorModelo extends SpringTest {
 				
 			
 				//busqueda por nombre de modelo
-				List <Auto> Resultado =
+			List <Auto> Resultado =
 						getSession().createCriteria(Auto.class).createAlias("modelo","modeloBuscado").add(Restrictions.eq("modeloBuscado.nombre","Clio")).list();
 				for (Auto busqueda : Resultado){
 					assertThat( busqueda.getModelo().getNombre()).isEqualTo("Clio");
 					
 				}
 				
-				//Falta busqueda por modelo directamente
-	
+				/*/buscar autos por modelo directamenta
+				List<Auto> Resultado2 =
+				getSession().createCriteria(Auto.class).add(Restrictions.eq("modelo","miModelo2")).list();
+
+		    	for (Auto busqueda: Resultado2){
+		    		assertThat( busqueda.getModelo()).isEqualTo("Clio");
+		    	}*/
 	}
-	
 	}
 	
 

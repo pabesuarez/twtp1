@@ -106,8 +106,9 @@ public class BuscarAutoPorColor extends SpringTest{
     	
     	for (Auto busqueda: Resultado){
     		assertThat(busqueda.getColor()).isEqualTo("Azul");
+    		
     	}   	
-		
+    	
     	}    	
 
 }

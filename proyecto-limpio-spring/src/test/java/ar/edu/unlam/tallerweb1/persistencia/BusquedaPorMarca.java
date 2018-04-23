@@ -17,7 +17,7 @@ import ar.edu.unlam.tallerweb1.modelo.Modelo;
 public class BusquedaPorMarca extends SpringTest {
 	@Test
 	@Transactional @Rollback(true)
-	public void BuscarModelo(){
+	public void BuscarMarca(){
 		
 		Marca miMarca1 = new Marca();
 		miMarca1.setNombre("Fiat");
@@ -91,15 +91,15 @@ public class BusquedaPorMarca extends SpringTest {
 				
 				
 				List <Auto> Resultado =
-						getSession().createCriteria(Auto.class).createAlias("modelo","modeloBuscado").add(Restrictions.eq("modeloBuscado.nombre","Peugueot")).list();
-						getSession().createCriteria(Modelo.class).createAlias("marca","marcaBuscada").add(Restrictions.eq("marcaBuscada.nombre","Peugueot")).list();
+						getSession().createCriteria(Auto.class).createAlias("modelo","modeloBuscado").add(Restrictions.eq("modeloBuscado.nombre","Fiat")).list();
+						getSession().createCriteria(Modelo.class).createAlias("marca","marcaBuscada").add(Restrictions.eq("marcaBuscada.nombre","Fiat")).list();
 				for (Auto busqueda : Resultado){
-					assertThat( busqueda.getModelo().getMarca().getNombre()).isEqualTo("Peugueot");
+					assertThat( busqueda.getModelo().getMarca().getNombre()).isEqualTo("Fiat");
 					
 				}
 				
-	
-	
+
+				
 	
 	
 	
