@@ -1,0 +1,115 @@
+package ar.edu.unlam.tallerweb1.persistencia;
+
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.assertj.core.api.AbstractAssert;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+
+import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Auto;
+import ar.edu.unlam.tallerweb1.modelo.Empleado;
+import ar.edu.unlam.tallerweb1.modelo.Marca;
+import ar.edu.unlam.tallerweb1.modelo.Modelo;
+
+public class BuscarAutoPorModelo extends SpringTest {
+	@Test
+	@Transactional @Rollback(true)
+	public void BuscarModelo(){
+		
+		Marca miMarca1 = new Marca();
+		miMarca1.setNombre("Fiat");
+		getSession().save(miMarca1);
+		
+		
+		Modelo miModelo1 = new Modelo();
+		miModelo1.setNombre("Uno");
+		miModelo1.setMarca(miMarca1);
+		getSession().save(miModelo1);
+		
+		
+		Auto miAuto1 = new Auto();
+		miAuto1 .setColor("Azul");
+		miAuto1 .setPatente("AAA 111");
+		miAuto1 .setModelo(miModelo1);
+		getSession().save(miAuto1 );
+	
+			Marca miMarca2 = new Marca();
+			miMarca2.setNombre("Renault");
+			getSession().save(miMarca2);
+			
+			
+			Modelo miModelo2 = new Modelo();
+			miModelo2.setNombre("Clio");
+			miModelo2.setMarca(miMarca2);
+			getSession().save(miModelo2);
+			
+			
+			Auto miAuto2 = new Auto();
+			miAuto2.setColor("Rojo");
+			miAuto2.setPatente("BBB 222");
+			miAuto2.setModelo(miModelo2);
+			getSession().save(miAuto2);
+			
+			
+				
+				Marca miMarca3 = new Marca();
+				miMarca3.setNombre("Peugueot");
+				getSession().save(miMarca3);
+				
+				
+				Modelo miModelo3 = new Modelo();
+				miModelo3.setNombre("408");
+				miModelo3.setMarca(miMarca3);
+				getSession().save(miModelo3);
+				
+				
+				Auto miAuto3 = new Auto();
+				miAuto3.setColor("Negro");
+				miAuto3.setPatente("CCC 333");
+				miAuto3.setModelo(miModelo3);
+				getSession().save(miAuto3);
+			
+				
+				
+				Modelo miModelo4 = new Modelo();
+				miModelo4.setNombre("206");
+				miModelo4.setMarca(miMarca3);
+				getSession().save(miModelo4);
+				
+				
+				Auto miAuto4 = new Auto();
+				miAuto4.setColor("Azul");
+				miAuto4.setPatente("DDD 333");
+				miAuto4.setModelo(miModelo4);
+				getSession().save(miAuto4);
+				
+				
+			
+				//busqueda por nombre de modelo
+			List <Auto> Resultado =
+						getSession().createCriteria(Auto.class).createAlias("modelo","modeloBuscado").add(Restrictions.eq("modeloBuscado.nombre","Clio")).list();
+				for (Auto busqueda : Resultado){
+					assertThat( busqueda.getModelo().getNombre()).isEqualTo("Clio");
+					
+				}
+				
+				/*/buscar autos por modelo directamenta
+				List<Auto> Resultado2 =
+				getSession().createCriteria(Auto.class).add(Restrictions.eq("modelo","miModelo2")).list();
+
+		    	for (Auto busqueda: Resultado2){
+		    		assertThat( busqueda.getModelo()).isEqualTo("Clio");
+		    	}*/
+	}
+	}
+	
+
+
